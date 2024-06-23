@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package monitoring;
+
+service MonitoringService {
+    rpc CheckDevice(Device) returns (Result) {}
+}
+
+message Device {
+    string name = 2;
+    string ip = 3;
+}
+
+message Result {
+    Statistic stat = 1;
+    Delay delay = 2;
+    Device device = 3;
+    string out = 4;
+    bool need_notification = 5;
+}
+
+message Statistic {
+    int64 transmitted = 1;
+    int64 received = 2;
+    int64 loss = 3;
+    int64 time = 4;
+}
+
+message Delay {
+    double min = 1;
+    double avg = 2;
+    double max = 3;
+}
